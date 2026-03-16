@@ -351,7 +351,7 @@ export function AddFundPage({ onNavigate, userProfile }: AddFundPageProps) {
                 </div>
                 <div className="bg-white/5 p-4 rounded-lg border border-white/10">
                   <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Bank Name</p>
-                  <p className="text-white font-medium">{userProfile?.bank_name || 'Bank Vercel'}</p>
+                  <p className="text-white font-medium">{userProfile?.bank_name || 'HSBC CREDIT UNION'}</p>
                 </div>
                 {[
               { label: 'Account Number', value: userProfile?.account_number, key: 'acc' },
